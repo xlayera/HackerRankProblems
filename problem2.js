@@ -16,28 +16,24 @@ function countingValleys(steps, path) {
     // Write your code here
 
     const tempArray = [...path];
-    let count = 1
-    let stepAr = []
+    let seaLevel = 0
+    let valleysCount = 0
+    let valleysFlag = false
 
     for (let i = 0; i < tempArray.length; i++) {
-        if (tempArray[i + 1] == tempArray[i]) {
-            count++
-        } else {
-            stepAr.push({ step: tempArray[i], count: count })
-            count = 1
+        if (tempArray[i] == 'U') seaLevel++
+        if (tempArray[i] == 'D') seaLevel--
+
+        if (seaLevel < 0) valleysFlag = true
+        
+        if (valleysFlag == true && seaLevel == 0) {
+            valleysCount++
+            valleysFlag = false
         }
+
     }
 
-    for (let j = 0; j < stepAr.length; j++) {
-        console.log(j, " ", stepAr[j]);
-        console.log(stepAr[j + 1] ? stepAr[j + 1].count - stepAr[j].count : "nada");
-        if (stepAr[j].step == 'U') {
-           
-        }
-    }
-
-
-    return stepAr
+    return valleysCount
 }
 
 
